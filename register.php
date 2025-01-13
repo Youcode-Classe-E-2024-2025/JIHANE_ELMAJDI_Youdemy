@@ -1,9 +1,10 @@
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> App landing</title>
+    <title> 🎓Youdemy🎓</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -37,14 +38,18 @@
             </div>
         </div>
     </div>
-    <!-- Preloader Start-->
+   
 
 
 <!-- Register -->
 
+
+
+
+
 <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
     <!-- Login Admin -->
-    <form class="form-default" action="login-bg.mp4" method="POST">
+    <form class="form-default" action="register.php" method="POST">
         
         <div class="login-form">
             <!-- logo-login -->
