@@ -1,3 +1,7 @@
-<?php 
-include_once 'config/db.php';
+<?php
+require_once 'config/db.php';
+
+$db = new Database();
+
+$pdo = $db->getConnection();
 ?>

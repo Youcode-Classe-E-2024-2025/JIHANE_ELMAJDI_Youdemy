@@ -1,15 +1,27 @@
 <?php
-$host = "localhost";    
-$dbname = "youdemy";    
-$username = "root";     
-$password = "";         
 
-try {
-   
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion réussie !";  
-} catch (PDOException $e) {
-    echo "Erreur de connexion : " . $e->getMessage();
+class Database {
+    private $host = "localhost";
+    private $dbname = "youdemy";
+    private $username = "root";
+    private $password = "";
+    private $pdo;
+
+  
+    public function __construct() {
+        try {
+            $this->pdo = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, $this->password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connexion réusssie";
+        } catch (PDOException $e) {
+            die("Erreur de connexion : " . $e->getMessage());
+        }
+    }
+
+    
+    public function getConnection() {
+        return $this->pdo;
+    }
 }
+
 ?>
