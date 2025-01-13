@@ -40,37 +40,7 @@
     </div>
 
 <!-- Register -->
-<?php
-require_once 'config/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-
-    if (!empty($name) && !empty($email) && !empty($password) && $password === $confirm_password) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $db = new Database();
-        $conn = $db->conn;
-
-        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-
-        if ($stmt->execute()) {
-            echo "Inscription réussie !";
-        } else {
-            echo "Erreur lors de l'inscription.";
-        }
-    } else {
-        echo "Veuillez remplir tous les champs correctement.";
-    }
-}
-?>
 
 <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
     <!-- Login Admin -->

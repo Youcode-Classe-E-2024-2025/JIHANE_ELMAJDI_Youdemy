@@ -15,6 +15,8 @@ class Database {
             die("Erreur de connexion : " . $e->getMessage());
         }
     }
+    
 }
 $db= new Database();
+
 ?>
