@@ -1,30 +1,25 @@
-// class Enrollment.php
 <?php
-require_once 'Database.php';
+class Enrollement {
+    private $id;
+    private $user_id;
+    private $cours_id;
+    private $enrolled_at;
 
-class Enrollment {
-    private $db;
-
-    public function __construct() {
-        $this->db = new Database(); 
+    public function __construct($user_id = 0, $cours_id = 0) {
+        $this->user_id = $user_id;
+        $this->cours_id = $cours_id;
     }
 
-    // Inscrire un étudiant dans un cours
-    public function enroll($course_id, $user_id) {
-        $sql = "INSERT INTO enrollments (course_id, user_id) VALUES (:course_id, :user_id)";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':course_id', $course_id);
-        $stmt->bindParam(':user_id', $user_id);
-        return $stmt->execute();
+    public function getId() {
+        return $this->id;
     }
-
-    // Récupérer tous les étudiants inscrits dans un cours
-    public function getEnrollments($course_id) {
-        $sql = "SELECT * FROM enrollments WHERE course_id = :course_id";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':course_id', $course_id);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getUserId() {
+        return $this->user_id;
+    }
+    public function getCoursId() {
+        return $this->cours_id;
+    }
+    public function getEnrolledAt() {
+        return $this->enrolled_at;
     }
 }
-?>
