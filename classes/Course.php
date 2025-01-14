@@ -1,29 +1,30 @@
-// class Course.php
 <?php
-require_once 'Database.php';
-
 class Course {
-    private $db;
+    private $id;
+    private $title;
+    private $description;
+    private $category_id;
+    private $created_at;
 
-    public function __construct() {
-        $this->db = new Database(); 
+    public function __construct($title = "", $description = "", $category_id = 0) {
+        $this->title = $title;
+        $this->description = $description;
+        $this->category_id = $category_id;
     }
 
-    
-    public function addCourse($title, $category_id, $teacher_id) {
-        $sql = "INSERT INTO courses (title, category_id, teacher_id) VALUES (:title, :category_id, :teacher_id)";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':category_id', $category_id);
-        $stmt->bindParam(':teacher_id', $teacher_id);
-        return $stmt->execute();
+    public function getId() {
+        return $this->id;
     }
-
-    public function getAllCourses() {
-        $sql = "SELECT * FROM courses";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getTitle() {
+        return $this->title;
+    }
+    public function getDescription() {
+        return $this->description;
+    }
+    public function getCategoryId() {
+        return $this->category_id;
+    }
+    public function getCreatedAt() {
+        return $this->created_at;
     }
 }
-?>
