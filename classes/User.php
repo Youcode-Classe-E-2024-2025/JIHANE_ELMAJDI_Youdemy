@@ -1,40 +1,35 @@
-// class User.php
 <?php
-require_once 'Database.php';
-
 class User {
-    private $db;
+    private $id;
+    private $name;
+    private $email;
+    private $password;
+    private $role;
+    private $created_at;
 
-    public function __construct() {
-        $this->db = new Database();
+    public function __construct($name = "", $email = "", $password = "", $role = "") {
+        $this->name = $name;
+        $this->email = $email;
+        $this->password = $password;
+        $this->role = $role;
     }
 
-   
-    public function register($name, $email, $password) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-
-        return $stmt->execute();
+    public function getId() {
+        return $this->id;
     }
-
-    public function login($email, $password) {
-        $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            return $user;
-        }
-
-        return false; 
+    public function getName() {
+        return $this->name;
+    }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function getPassword() {
+        return $this->password;
+    }
+    public function getRole() {
+        return $this->role;
+    }
+    public function getCreatedAt() {
+        return $this->created_at;
     }
 }
-?>
