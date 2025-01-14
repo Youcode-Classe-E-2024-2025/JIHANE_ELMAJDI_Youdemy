@@ -1,26 +1,20 @@
-// class Role.php
+
 <?php
-require_once 'Database.php';
-
 class Role {
-    private $db;
+    private $id;
+    private $name;
 
-    public function __construct() {
-        $this->db = new Database(); 
+    public function __construct($name = "") {
+        $this->name = $name;
     }
 
-    // Ajouter un rôle pour un utilisateur
-    public function assignRole($user_id, $role) {
-        $sql = "UPDATE users SET role = :role WHERE id = :user_id";
-        $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':role', $role);
-        $stmt->bindParam(':user_id', $user_id);
-        return $stmt->execute();
+    public function getId() {
+        return $this->id;
     }
-
-    // Récupérer tous les rôles
-    public function getRoles() {
-        return ['etudiant', 'enseignant', 'admin'];
+    public function getName() {
+        return $this->name;
+    }
+    public function setName($name) {
+        $this->name = $name;
     }
 }
-?>
