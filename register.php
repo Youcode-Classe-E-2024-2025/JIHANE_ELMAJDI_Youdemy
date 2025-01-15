@@ -67,12 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
     <!-- Login Admin -->
-    <form class="form-default" action="register.php" method="POST">
-        
-        <div class="login-form">
+    <div style="max-width: 250px; margin: 0 auto;">
+        <form class="form-default" action="register.php" method="POST">
+            <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
             </div>
             <h2>Registration Here</h2>
 
@@ -95,15 +95,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="username" placeholder="Full name">
             </div>
             <div class="form-input">
-                <label for="name">Email Address</label>
+                <label for="email">Email Address</label>
                 <input type="email" name="email" placeholder="Email Address">
             </div>
             <div class="form-input">
-                <label for="name">Password</label>
+                <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password">
             </div>
             <div class="form-input">
-                <label for="name">Confirm Password</label>
+                <label for="confirm_password">Confirm Password</label>
                 <input type="password" name="confirm_password" placeholder="Confirm Password">
             </div>
             <div class="form-input pt-30">
@@ -113,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="login.php" class="registration">login</a>
         </div>
     </form>
+    </div>
     <!-- /end login form -->
 </main>
 
