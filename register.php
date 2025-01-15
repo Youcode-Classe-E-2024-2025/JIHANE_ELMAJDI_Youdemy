@@ -1,4 +1,27 @@
+<?php
+require_once 'classes/Authentication.php';
 
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        $auth = new Authentication();
+        
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
+        
+        if ($auth->register($username, $email, $password, 3)) {
+            $success = "Compte créé avec succès! Redirection vers la page de connexion...";
+            header("refresh:2;url=login.php");
+        }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+    }
+}
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -53,9 +76,23 @@
             </div>
             <h2>Registration Here</h2>
 
+            <?php if ($error): ?>
+                <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if ($success): ?>
+                <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                    <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                    <?php echo $success; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="form-input">
-                <label for="name">Full name</label>
-                <input  type="text" name="name" placeholder="Full name">
+                <label for="username">Full name</label>
+                <input type="text" name="username" placeholder="Full name">
             </div>
             <div class="form-input">
                 <label for="name">Email Address</label>
@@ -73,7 +110,7 @@
                 <input type="submit" name="submit" value="Registration">
             </div>
             <!-- Forget Password -->
-            <a href="login.html" class="registration">login</a>
+            <a href="login.php" class="registration">login</a>
         </div>
     </form>
     <!-- /end login form -->
