@@ -11,6 +11,7 @@ class Database {
             try {
                 self::$conn = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$db_name, self::$username, self::$password);
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           
             } catch (PDOException $e) {
                 die("Erreur de connexion" . $e->getMessage());
             }
@@ -18,4 +19,5 @@ class Database {
         return self::$conn;
     }
 }
+$db= new Database();
 ?>
