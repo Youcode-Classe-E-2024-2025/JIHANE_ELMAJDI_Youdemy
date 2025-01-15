@@ -74,50 +74,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
         <!-- Login Admin -->
-         
-         
         <form class="form-default" action="login.php" method="POST">
-            
             <div class="login-form">
-                <!-- logo-login -->
-                <div class="logo-login">
-                    <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
-                </div>
-                <h2>Login Here</h2>
-
-                <?php if ($error): ?>
-                    <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                        <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
-                        <?php echo $error; ?>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if ($success): ?>
-                    <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-                        <?php echo $success; ?>
-                    </div>
-                <?php endif; ?>
-
-                <div class="form-input">
-                    <label for="name">Email</label>
-                    <input  type="email" name="email" placeholder="Email">
-                </div>
-                <div class="form-input">
-                    <label for="name">Password</label>
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <div class="form-input pt-30">
-                    <input type="submit" name="submit" value="login">
-                </div>
-                
-                <!-- Forget Password -->
-                <a href="#" class="forget">Forget Password</a>
-                <!-- Forget Password -->
-                <a href="register.php" class="registration">Registration</a>
+            <!-- logo-login -->
+            <div class="logo-login">
+                <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
             </div>
-        </form>
-        <!-- /end login form -->
+            <h2>Login Here</h2>
+
+            <?php if ($error): ?>
+                <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if ($success): ?>
+                <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                    <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                    <?php echo $success; ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="form-input">
+                <label for="name">Email</label>
+                <input  type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-input">
+                <label for="name">Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-input pt-30">
+                <input type="submit" name="submit" value="login">
+            </div>
+            
+            <!-- Forget Password -->
+            <a href="#" class="forget">Forget Password</a>
+            <!-- Forget Password -->
+            <a href="register.php" class="registration">Registration</a>
+        </div>
+    </form>
     </main>
 
 
