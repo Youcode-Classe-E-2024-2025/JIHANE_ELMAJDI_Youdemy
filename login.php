@@ -1,3 +1,35 @@
+<?php
+require_once 'classes/Authentication.php';
+
+$error = '';
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        $auth = new Authentication();
+        
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        
+        if ($auth->login($email, $password)) {
+            // Rediriger selon le rôle
+            switch($_SESSION['role']) {
+                case 'admin':
+                    header('Location: admin/dashboard.php');
+                    break;
+                case 'teacher':
+                    header('Location: teacher/dashboard.php');
+                    break;
+                default:
+                    header('Location: student/dashboard.php');
+            }
+            exit();
+        }
+    } catch (Exception $e) {
+        $error = $e->getMessage();
+    }
+}
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -49,9 +81,24 @@
             <div class="login-form">
                 <!-- logo-login -->
                 <div class="logo-login">
-                    <a href="index.html"><img src="assets/img/logo/loder.png" alt=""></a>
+                    <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
                 </div>
                 <h2>Login Here</h2>
+
+                <?php if ($error): ?>
+                    <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                        <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                        <?php echo $error; ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($success): ?>
+                    <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <?php echo $success; ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="form-input">
                     <label for="name">Email</label>
                     <input  type="email" name="email" placeholder="Email">
