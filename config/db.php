@@ -1,19 +1,31 @@
 <?php
 class Database {
-    private $host = "localhost";
-    private $db_name = "youdemy";
-    private $username = "root";
-    private $password = "";
-    public $conn;
+    private $host = 'localhost';  
+    private $db_name = 'youdemy'; 
+    private $username = 'root';   
+    private $password = '';   
+    private $conn;
 
-    public function connect() {
+    
+    public function getConnection() {
+        $this->conn = null;
+
         try {
-            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->db_name}", $this->username, $this->password);
+          
+            $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->db_name;
+         
+            $this->conn = new PDO($dsn, $this->username, $this->password);
+         
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            echo "Connexion réussie";
+        } catch (PDOException $exception) {
+            
+            echo "Erreur de connexion à la base de données: " . $exception->getMessage();
         }
+
         return $this->conn;
     }
+  
 }
+
 ?>
