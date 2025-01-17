@@ -1,35 +1,4 @@
-<?php
-require_once 'classes/Authentication.php';
 
-$error = '';
-$success = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $auth = new Authentication();
-        
-        $email = trim($_POST['email']);
-        $password = $_POST['password'];
-        
-        if ($auth->login($email, $password)) {
-            // Rediriger selon le rôle
-            switch($_SESSION['role']) {
-                case 'admin':
-                    header('Location: admin/dashboard.php');
-                    break;
-                case 'teacher':
-                    header('Location: teacher/dashboard.php');
-                    break;
-                default:
-                    header('Location: student/dashboard.php');
-            }
-            exit();
-        }
-    } catch (Exception $e) {
-        $error = $e->getMessage();
-    }
-}
-?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
