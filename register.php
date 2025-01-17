@@ -1,27 +1,3 @@
-<?php
-require_once 'classes/Authentication.php';
-
-$error = '';
-$success = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $auth = new Authentication();
-        
-        $username = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-        
-        if ($auth->register($username, $email, $password, $confirm_password, 1)) {
-            $success = "Compte créé avec succès!";
-            // On ne fait plus la redirection
-        }
-    } catch (Exception $e) {
-        $error = $e->getMessage();
-    }
-}
-?>
 
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -75,25 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
                 </div>
                 <h2>Registration Here</h2>
-
-                <?php if ($error): ?>
-                    <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                        <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
-                        <?php echo $error; ?>
-                    </div>
-                <?php endif; ?>
-                
-                <?php if ($success): ?>
-                    <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-                        <?php echo $success; ?>
-                        <div style="margin-top: 15px;">
-                            <a href="login.php" style="color: white; text-decoration: underline;">Se connecter</a>
-                            ou
-                            <a href="index.php" style="color: white; text-decoration: underline;">Retour à l'accueil</a>
-                        </div>
-                    </div>
-                <?php else: ?>
                     <div class="form-input">
                         <label for="username">Full name</label>
                         <input type="text" name="username" placeholder="Full name">
@@ -115,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <!-- Forget Password -->
                     <a href="login.php" class="registration">login</a>
-                <?php endif; ?>
+              
             </div>
         </form>
     </div>
