@@ -13,15 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
         
-        if ($auth->register($username, $email, $password, 3)) {
-            $success = "Compte créé avec succès! Redirection vers la page de connexion...";
-            header("refresh:2;url=login.php");
+        if ($auth->register($username, $email, $password, $confirm_password, 1)) {
+            $success = "Compte créé avec succès!";
+            // On ne fait plus la redirection
         }
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
 }
 ?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -64,103 +65,107 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- Register -->
 
-
 <main class="login-body" data-vide-bg="assets/img/login-bg.mp4">
     <!-- Login Admin -->
     <div style="max-width: 250px; margin: 0 auto;">
         <form class="form-default" action="register.php" method="POST">
             <div class="login-form">
-            <!-- logo-login -->
-            <div class="logo-login">
-                <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
-            </div>
-            <h2>Registration Here</h2>
-
-            <?php if ($error): ?>
-                <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
-                    <?php echo $error; ?>
+                <!-- logo-login -->
+                <div class="logo-login">
+                    <a href="index.php"><img src="assets/img/logo/loder.png" alt=""></a>
                 </div>
-            <?php endif; ?>
-            
-            <?php if ($success): ?>
-                <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
-                    <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-                    <?php echo $success; ?>
-                </div>
-            <?php endif; ?>
+                <h2>Registration Here</h2>
 
-            <div class="form-input">
-                <label for="username">Full name</label>
-                <input type="text" name="username" placeholder="Full name">
+                <?php if ($error): ?>
+                    <div style="background-color: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                        <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                        <?php echo $error; ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($success): ?>
+                    <div style="background-color: #00cc66; color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-weight: 500;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <?php echo $success; ?>
+                        <div style="margin-top: 15px;">
+                            <a href="login.php" style="color: white; text-decoration: underline;">Se connecter</a>
+                            ou
+                            <a href="index.php" style="color: white; text-decoration: underline;">Retour à l'accueil</a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="form-input">
+                        <label for="username">Full name</label>
+                        <input type="text" name="username" placeholder="Full name">
+                    </div>
+                    <div class="form-input">
+                        <label for="email">Email Address</label>
+                        <input type="email" name="email" placeholder="Email Address">
+                    </div>
+                    <div class="form-input">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-input">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" name="confirm_password" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-input pt-30">
+                        <input type="submit" name="submit" value="Registration">
+                    </div>
+                    <!-- Forget Password -->
+                    <a href="login.php" class="registration">login</a>
+                <?php endif; ?>
             </div>
-            <div class="form-input">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" placeholder="Email Address">
-            </div>
-            <div class="form-input">
-                <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Password">
-            </div>
-            <div class="form-input">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" name="confirm_password" placeholder="Confirm Password">
-            </div>
-            <div class="form-input pt-30">
-                <input type="submit" name="submit" value="Registration">
-            </div>
-            <!-- Forget Password -->
-            <a href="login.php" class="registration">login</a>
-        </div>
-    </form>
+        </form>
     </div>
     <!-- /end login form -->
 </main>
 
 
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
+<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="./assets/js/popper.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
+<script src="./assets/js/jquery.slicknav.min.js"></script>
 
-    <!-- Video bg -->
-    <script src="./assets/js/jquery.vide.js"></script>
+<!-- Video bg -->
+<script src="./assets/js/jquery.vide.js"></script>
 
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <!-- One Page, Animated-HeadLin -->
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="./assets/js/owl.carousel.min.js"></script>
+<script src="./assets/js/slick.min.js"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="./assets/js/wow.min.js"></script>
+<script src="./assets/js/animated.headline.js"></script>
+<script src="./assets/js/jquery.magnific-popup.js"></script>
 
-    <!-- Date Picker -->
-    <script src="./assets/js/gijgo.min.js"></script>
-    <!-- Nice-select, sticky -->
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-    <!-- Progress -->
-    <script src="./assets/js/jquery.barfiller.js"></script>
-    
-    <!-- counter , waypoint,Hover Direction -->
-    <script src="./assets/js/jquery.counterup.min.js"></script>
-    <script src="./assets/js/waypoints.min.js"></script>
-    <script src="./assets/js/jquery.countdown.min.js"></script>
-    <script src="./assets/js/hover-direction-snake.min.js"></script>
+<!-- Date Picker -->
+<script src="./assets/js/gijgo.min.js"></script>
+<!-- Nice-select, sticky -->
+<script src="./assets/js/jquery.nice-select.min.js"></script>
+<script src="./assets/js/jquery.sticky.js"></script>
+<!-- Progress -->
+<script src="./assets/js/jquery.barfiller.js"></script>
 
-    <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
-    
-    </body>
+<!-- counter , waypoint,Hover Direction -->
+<script src="./assets/js/jquery.counterup.min.js"></script>
+<script src="./assets/js/waypoints.min.js"></script>
+<script src="./assets/js/jquery.countdown.min.js"></script>
+<script src="./assets/js/hover-direction-snake.min.js"></script>
+
+<!-- contact js -->
+<script src="./assets/js/contact.js"></script>
+<script src="./assets/js/jquery.form.js"></script>
+<script src="./assets/js/jquery.validate.min.js"></script>
+<script src="./assets/js/mail-script.js"></script>
+<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->	
+<script src="./assets/js/plugins.js"></script>
+<script src="./assets/js/main.js"></script>
+
+</body>
 </html>

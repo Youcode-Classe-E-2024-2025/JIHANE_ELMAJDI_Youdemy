@@ -12,17 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Connecter l'utilisateur
         if ($auth->login($email, $password)) {
-            // Rediriger selon le rôle
-            switch($_SESSION['role']) {
-                case 'admin':
-                    header('Location: admin/dashboard.php');
-                    break;
-                case 'teacher':
-                    header('Location: teacher/dashboard.php');
-                    break;
-                default:
-                    header('Location: student/dashboard.php');
-            }
+            // Rediriger vers la page de choix de rôle
+            header('Location: ../dashboardrole.php');
             exit();
         }
     } catch (Exception $e) {
