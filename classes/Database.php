@@ -21,7 +21,7 @@ class Database {
             echo "Erreur de connexion: " . $e->getMessage();
         }
 
-        return $this->conn; // إرجاع الاتصال
+        return $this->conn; 
     }
 }
 ?>

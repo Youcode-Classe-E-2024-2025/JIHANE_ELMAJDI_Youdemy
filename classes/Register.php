@@ -1,24 +1,33 @@
 <?php
 class Register {
     private $db;
-    private $name;
-    private $email;
-    private $password;
-    private $role;
 
-    public function __construct($db, $name, $email, $password, $role) {
+    public function __construct($db) {
         $this->db = $db;
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
     }
 
-    public function registerUser() {
-        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$this->name, $this->email, $hashedPassword, $this->role]);
+    
+    public function emailExists($email) {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+    public function registerUser($name, $email, $password) {
+       
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $roleId = 3; 
+
+        $query = "INSERT INTO users (name, email, password, role_id) VALUES (:name, :email, :password, :role_id)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':role_id', $roleId);
+        return $stmt->execute();
     }
 }
 ?>
