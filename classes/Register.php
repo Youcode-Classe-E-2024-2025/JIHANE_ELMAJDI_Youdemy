@@ -14,15 +14,15 @@ class Register {
     }
 
     public function registerUser($name, $email, $password, $roleId) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-        $query = "INSERT INTO users (name, email, password, role_id) VALUES (:name, :email, :password, :role_id)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        $stmt->bindParam(':role_id', $roleId, PDO::PARAM_INT);  
-        return $stmt->execute();
-    }
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "INSERT INTO users (name, email, password, role_id) VALUES (:name, :email, :password, :role_id)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $hashedPassword);
+    $stmt->bindParam(':role_id', $roleId, PDO::PARAM_INT); 
+    return $stmt->execute();
+}
 }
 ?>
