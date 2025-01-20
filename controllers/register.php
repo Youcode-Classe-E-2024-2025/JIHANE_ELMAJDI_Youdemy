@@ -197,7 +197,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
         <div class="input-container">
             <label for="role">Rôle:</label>
             <select name="role_id" id="role" required>
-                <option value="3">Administrateur</option>
                 <option value="2">Enseignant</option>
                 <option value="1">Etudiant</option>
             </select>
