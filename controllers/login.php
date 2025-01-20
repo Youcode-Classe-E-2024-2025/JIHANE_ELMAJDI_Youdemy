@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffccf9, #cce7ff);
+            background: linear-gradient(135deg, #d4a5f9, #ff77b6); /* Dégradé mauve et rose */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
         h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #ff77b6; /* Titre en rose */
             font-size: 24px;
             letter-spacing: 1px;
         }
@@ -99,8 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         }
 
         input:focus {
-            border-color: #6c63ff;
-            box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+            border-color: #ff77b6;
+            box-shadow: 0 0 8px rgba(255, 119, 182, 0.5);
         }
 
         input:focus + label, 
@@ -108,13 +108,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             top: -10px;
             left: 10px;
             font-size: 12px;
-            color: #6c63ff;
+            color: #ff77b6;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(90deg, #ff6f91, #6c63ff);
+            background: linear-gradient(90deg, #ff6f91, #ff77b6); /* Dégradé rose et mauve */
             color: white;
             border: none;
             border-radius: 8px;
@@ -126,8 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(108, 99, 255, 0.5);
-            background: linear-gradient(90deg, #6c63ff, #ff6f91);
+            box-shadow: 0 4px 10px rgba(255, 119, 182, 0.5);
+            background: linear-gradient(90deg, #ff77b6, #ff6f91); /* Dégradé inverse au survol */
         }
 
         .alert {
