@@ -3,24 +3,46 @@
 include_once '../config/db.php';
 include_once '../classes/Login.php';
 
-$message = ''; // Pour afficher les messages de connexion
+$message = ''; 
 
+session_start();
+
+
+// Vérifier si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    // Récupérer les données du formulaire
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Créer une instance de la classe Login
-    $login = new Login($db);
+    // Vérifier si l'utilisateur existe dans la base de données
+    $query = "SELECT * FROM users WHERE email = :email";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérifier si les informations de connexion sont valides
-    if ($login->validateLogin($email, $password)) {
-        $message = "<div class='alert success'>Connexion réussie !</div>";
-        // Rediriger vers la page d'accueil ou le tableau de bord
-        header("Location: dashboard.php");
-        exit;
+   
+    if ($user) {
+       
+        if (password_verify($password, $user['password'])) {
+         
+            if ($user['role_id'] == 3) {
+               
+                $_SESSION['role_id'] = $user['role_id'];
+                $_SESSION['user_id'] = $user['id']; 
+                header("Location: admin.php"); 
+                exit;
+            } else {
+                
+                $_SESSION['role_id'] = $user['role_id'];
+                header("Location: home.php");
+                exit;
+            }
+        } else {
+            echo "Mot de passe incorrect!";
+        }
     } else {
-        $message = "<div class='alert error'>Email ou mot de passe incorrect.</div>";
+        echo "Utilisateur non trouvé!";
     }
 }
 ?>
