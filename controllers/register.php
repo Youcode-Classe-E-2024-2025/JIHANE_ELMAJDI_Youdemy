@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 
         form h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #ff77b6; /* Titre en rose */
             font-size: 24px;
             font-weight: bold;
         }
